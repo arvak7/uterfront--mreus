@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 import { VehicleModel } from 'src/app/models/vehicle.model';
 import { NgForm } from '@angular/forms';
 import { VehiclesService } from 'src/app/services/vehicles.service';
@@ -15,9 +16,18 @@ export class VehicleComponent implements OnInit {
 
   vehicle: VehicleModel = new VehicleModel();
 
-  constructor(private vehiclesService: VehiclesService) { }
+  constructor(private vehiclesService: VehiclesService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id !== 'new') {
+      this.vehiclesService.getVehicle(id)
+        .subscribe( (resp: VehicleModel) => {
+            this.vehicle = resp;
+        });
+    }
   }
 
   guardar(form: NgForm) {
@@ -31,22 +41,22 @@ export class VehicleComponent implements OnInit {
       title: 'Espere',
       text: 'Guardando información',
       allowOutsideClick: false,
-      icon: 'info'      
+      icon: 'info'
     });
     Swal.showLoading();
 
     let peticion: Observable<any>;
 
     if (this.vehicle.vehicleId) {
-      peticion = this.vehiclesService.updateVehicle(this.vehicle);      
+      peticion = this.vehiclesService.updateVehicle(this.vehicle);
     } else {
-      peticion = this.vehiclesService.createVehicle(this.vehicle);      
-    }    
+      peticion = this.vehiclesService.createVehicle(this.vehicle);
+    }
     peticion.subscribe(resp => {
       Swal.fire({
         title: this.vehicle.model,
-        text: 'succes',
-        icon: 'info'
+        text: 'Se actualizó correctamente',
+        icon: 'success'
       });
     })
   }

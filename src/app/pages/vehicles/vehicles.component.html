@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<table class="table mt-3 animated fadeIn faster">
+<table *ngIf="!cargando && vehicles.length > 0" class="table mt-3 animated fadeIn faster">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -20,6 +20,7 @@
             <th scope="col">Model</th>
             <th scope="col">Plate</th>
             <th scope="col">License</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -29,10 +30,20 @@
             <td>{{vehicle.model}}</td>
             <td>{{vehicle.plate}}</td>
             <td>{{vehicle.licenseRequired}}</td>
+            <td>
+                <button class="btn btn-info mr-1"
+                    [routerLink]="['/vehicle', vehicle.vehicleId]">
+                    <i class="fa fa-pen"></i>
+                </button>
+                <button class="btn btn-danger" (click)="removeVehicle( vehicle, i )">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
         </tr>
 </table>
 
-<div class="alert alert-warning text-center mt-3">
+<div *ngIf="!cargando" 
+    class="alert alert-warning text-center mt-3 animated fadeIn faster">
     <h4 class="alert-heading">No hay Registros</h4>
     <p>
         <i class="fa fa-exclamation fa-2x"></i>
@@ -42,7 +53,7 @@
     </p>
 </div>
 
-<div class="alert alert-info text-center mt-3">
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
     <h4 class="alert-heading">Cargando</h4>
     <p>
         <i class="fa fa-sync-alt fa-spin fa-2x"></i>

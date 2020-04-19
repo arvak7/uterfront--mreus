@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { VehicleModel } from '../models/vehicle.model';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,5 +33,13 @@ export class VehiclesService {
 
   getVehicles() {
     return this.http.get(`${this.url}/`);
+  }
+
+  getVehicle(id: string) {
+    return this.http.get((`${ this.url }/${id}`));
+  }
+
+  removeVehicle(id: number) {
+    return this.http.delete((`${ this.url }/${id}`));
   }
 }
