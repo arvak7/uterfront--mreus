@@ -1,0 +1,82 @@
+<h1>Vehiculo <small>Nombre del Vehiculo</small> </h1>
+<hr>
+
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/vehicles">
+            <i class="fa fa-arrow-left"></i>
+            Regresar
+        </button>
+    </div>
+</div>
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <form (ngSubmit)="guardar( f )" #f="ngForm">
+            <div class="form-group">
+                <label>Id</label>
+                <input type="text" 
+                        class="form-control" 
+                        placeholder="Id"
+                        [(ngModel)]="vehicle.vehicleId"
+                        name="id"
+                        disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+            <div class="form-group">
+                <label>Brand</label>
+                <input type="text" 
+                       class="form-control"
+                       placeholder="Vehicle brand" 
+                       [(ngModel)]="vehicle.brand"
+                       name="brand"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Model</label>
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="Vehicle model" 
+                       [(ngModel)]="vehicle.model"
+                       name="model"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Plate</label>
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="Vehicle plate" 
+                       [(ngModel)]="vehicle.plate"
+                       name="plate"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>License</label>
+                <input type="text" 
+                       class="form-control " 
+                       placeholder="Vehicle license required" 
+                       [(ngModel)]="vehicle.licenseRequired"
+                       name="license"     
+                       oninput="this.value = this.value.toUpperCase()"                  
+                       minlength="1"
+                       maxlength="1"
+                       required>
+            </div>
+
+            <hr>
+
+            <div class="form-group text-center">
+                <button type="submit"
+                        class="btn btn-primary w-25">
+                <i class="fa fa-save"></i>                        
+                Guardar
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
