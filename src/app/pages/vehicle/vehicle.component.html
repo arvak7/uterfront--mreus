@@ -28,21 +28,26 @@
                 <label>Brand</label>
                 <input type="text" 
                        class="form-control"
+                       name="brand"  
                        placeholder="Vehicle brand" 
-                       [(ngModel)]="vehicle.brand"
-                       (ngModelChange)="refreshName(vehicle)"                      
-                       name="brand"                       
+                       [(ngModel)]="vehicle.brand"                                            
+                       (ngModelChange)="refreshName(vehicle)"    
+                       [class.is-invalid]="(brand.invalid && (brand.dirty || brand.touched)) || (brand.invalid && f.submitted)"
+                       #brand="ngModel"  
                        required>
+
             </div>
 
             <div class="form-group">
                 <label>Model</label>
                 <input type="text" 
                        class="form-control" 
+                       name="model"
                        placeholder="Vehicle model" 
                        [(ngModel)]="vehicle.model"
                        (ngModelChange)="refreshName(vehicle)"
-                       name="model"
+                       [class.is-invalid]="(model.invalid && (model.dirty || model.touched)) || (model.invalid && f.submitted)"
+                       #model="ngModel"                         
                        required>
             </div>
 
@@ -50,10 +55,13 @@
                 <label>Plate</label>
                 <input type="text" 
                        class="form-control" 
+                       name="plate"
                        placeholder="Vehicle plate" 
                        [(ngModel)]="vehicle.plate"
-                       (ngModelChange)="refreshName(vehicle)"
-                       name="plate"
+                       (ngModelChange)="refreshName(vehicle)" 
+                       [class.is-invalid]="(plate.invalid && (plate.dirty || plate.touched)) || (plate.invalid && f.submitted)"
+                       oninput="this.value = this.value.toUpperCase()"  
+                       #plate="ngModel"                         
                        required>
             </div>
 
@@ -61,10 +69,12 @@
                 <label>License</label>
                 <input type="text" 
                        class="form-control " 
+                       name="license" 
                        placeholder="Vehicle license required" 
-                       [(ngModel)]="vehicle.licenseRequired"
-                       name="license"     
-                       oninput="this.value = this.value.toUpperCase()"                  
+                       [(ngModel)]="vehicle.licenseRequired"                           
+                       oninput="this.value = this.value.toUpperCase()"  
+                       [class.is-invalid]="(license.invalid && (license.dirty || license.touched)) || (license.invalid && f.submitted)"
+                       #license="ngModel"                  
                        minlength="1"
                        maxlength="1"
                        required>
