@@ -1,4 +1,4 @@
-<h1>Listado de vehiculos</h1>
+<h1>Listado de vehículos</h1>
 <hr>
 
 <div class="row">
@@ -42,8 +42,8 @@
         </tr>
 </table>
 
-<div *ngIf="!cargando" 
-    class="alert alert-warning text-center mt-3 animated fadeIn faster">
+<div *ngIf="!cargando && vehicles.length === 0" 
+     class="alert alert-warning text-center mt-3 animated fadeIn faster">
     <h4 class="alert-heading">No hay Registros</h4>
     <p>
         <i class="fa fa-exclamation fa-2x"></i>

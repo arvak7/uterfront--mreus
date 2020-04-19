@@ -1,4 +1,4 @@
-<h1>Vehiculo <small>Nombre del Vehiculo</small> </h1>
+<h1>Vehículo <small>{{vehicleName}}</small> </h1>
 <hr>
 
 <div class="row text-right">
@@ -30,7 +30,8 @@
                        class="form-control"
                        placeholder="Vehicle brand" 
                        [(ngModel)]="vehicle.brand"
-                       name="brand"
+                       (ngModelChange)="refreshName(vehicle)"                      
+                       name="brand"                       
                        required>
             </div>
 
@@ -40,6 +41,7 @@
                        class="form-control" 
                        placeholder="Vehicle model" 
                        [(ngModel)]="vehicle.model"
+                       (ngModelChange)="refreshName(vehicle)"
                        name="model"
                        required>
             </div>
@@ -50,6 +52,7 @@
                        class="form-control" 
                        placeholder="Vehicle plate" 
                        [(ngModel)]="vehicle.plate"
+                       (ngModelChange)="refreshName(vehicle)"
                        name="plate"
                        required>
             </div>

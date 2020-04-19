@@ -15,22 +15,23 @@ import { Observable } from 'rxjs';
 export class VehicleComponent implements OnInit {
 
   vehicle: VehicleModel = new VehicleModel();
+  vehicleName: string = "";
 
   constructor(private vehiclesService: VehiclesService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-
+    const id = this.route.snapshot.paramMap.get('id');    
     if (id !== 'new') {
       this.vehiclesService.getVehicle(id)
         .subscribe( (resp: VehicleModel) => {
             this.vehicle = resp;
+            this.refreshName(resp);
         });
     }
   }
 
-  guardar(form: NgForm) {
+    guardar(form: NgForm) {
 
     if (form.invalid) {
       console.log('Formulario invalido')
@@ -59,5 +60,12 @@ export class VehicleComponent implements OnInit {
         icon: 'success'
       });
     })
+  }
+
+  refreshName(vehicle: VehicleModel) {
+    var brand = this.vehicle.brand == undefined ? '' : this.vehicle.brand;
+    var model = this.vehicle.model == undefined ? '' : this.vehicle.model;
+    var plate = this.vehicle.plate == undefined ? '' : this.vehicle.plate;
+    this.vehicleName = brand + ' ' + model + ' ' + plate;
   }
 }
