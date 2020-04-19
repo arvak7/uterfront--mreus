@@ -48,7 +48,7 @@ export class VehicleComponent implements OnInit {
 
     let peticion: Observable<any>;
 
-    if (this.vehicle.vehicleId) {
+    if (this.vehicle.id) {
       peticion = this.vehiclesService.updateVehicle(this.vehicle);
     } else {
       peticion = this.vehiclesService.createVehicle(this.vehicle);

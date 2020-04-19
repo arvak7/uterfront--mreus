@@ -1,1 +1,81 @@
-<p>driver works!</p>
+<h1>Conductor <small>{{driverName}}</small> </h1>
+<hr>
+
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/drivers">
+            <i class="fa fa-arrow-left"></i>
+            Regresar
+        </button>
+    </div>
+</div>
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <form (ngSubmit)="guardar( f )" #f="ngForm">
+            <div class="form-group">
+                <label>Id</label>
+                <input type="text" 
+                        class="form-control" 
+                        placeholder="Id"
+                        [(ngModel)]="driver.id"
+                        name="id"
+                        disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" 
+                       class="form-control"
+                       name="name"  
+                       placeholder="Driver name" 
+                       [(ngModel)]="driver.name"                                            
+                       (ngModelChange)="refreshName(driver)"    
+                       [class.is-invalid]="(name.invalid && (name.dirty || name.touched)) || (name.invalid && f.submitted)"
+                       #name="ngModel"  
+                       required>
+
+            </div>
+
+            <div class="form-group">
+                <label>Surname</label>
+                <input type="text" 
+                       class="form-control" 
+                       name="surname"
+                       placeholder="Driver model" 
+                       [(ngModel)]="driver.surname"
+                       (ngModelChange)="refreshName(driver)"
+                       [class.is-invalid]="(surname.invalid && (surname.dirty || surname.touched)) || (surname.invalid && f.submitted)"
+                       #surname="ngModel"                         
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>License</label>
+                <input type="text" 
+                       class="form-control " 
+                       name="license" 
+                       placeholder="Driver license required" 
+                       [(ngModel)]="driver.license"                           
+                       oninput="this.value = this.value.toUpperCase()"  
+                       [class.is-invalid]="(license.invalid && (license.dirty || license.touched)) || (license.invalid && f.submitted)"
+                       #license="ngModel"                  
+                       minlength="1"
+                       maxlength="1"
+                       required>
+            </div>
+
+            <hr>
+
+            <div class="form-group text-center">
+                <button type="submit"
+                        class="btn btn-primary w-25">
+                <i class="fa fa-save"></i>                        
+                Guardar
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>

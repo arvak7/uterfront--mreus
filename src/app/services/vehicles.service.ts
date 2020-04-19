@@ -18,7 +18,7 @@ export class VehiclesService {
     return this.http.post(`${this.url}`, vehicle)
     .pipe(
       map( (resp: VehicleModel) => {
-        vehicle.vehicleId = resp.vehicleId;
+        vehicle.id = resp.id;
       })
     );
   }
@@ -27,8 +27,8 @@ export class VehiclesService {
     const vehicleTemp = {
       ...vehicle
     }
-    delete vehicleTemp.vehicleId;
-    return this.http.put(`${ this.url }/${vehicle.vehicleId}`, vehicleTemp);
+    delete vehicleTemp.id;
+    return this.http.put(`${ this.url }/${vehicle.id}`, vehicleTemp);
   }
 
   getVehicles() {

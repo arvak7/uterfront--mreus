@@ -34,7 +34,7 @@ export class VehiclesComponent implements OnInit {
       showCancelButton: true
     }).then( resp => {
       if ( resp.value ) {
-        this.vehicleService.removeVehicle( vehicle.vehicleId ).subscribe();
+        this.vehicleService.removeVehicle( vehicle.id ).subscribe();
         this.vehicles.splice(i,1);
       }
     });    

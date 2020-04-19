@@ -1,1 +1,62 @@
-<p>drivers works!</p>
+<h1>Listado de conductores</h1>
+<hr>
+
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/driver/new"
+            class="btn btn-primary">
+            <i class="fa fa-plus">
+                Agregar
+            </i>
+        </button>
+    </div>
+</div>
+
+<table *ngIf="!loading && drivers.length > 0" class="table mt-3 animated fadeIn faster">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">License</th>            
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let driver of drivers; let i = index">
+            <th scope="row">{{driver.id}}</th>
+            <td>{{driver.name}}</td>
+            <td>{{driver.surname}}</td>
+            <td>{{driver.license}}</td>            
+            <td>
+                <button class="btn btn-info mr-1"
+                    [routerLink]="['/driver', driver.id]">
+                    <i class="fa fa-pen"></i>
+                </button>
+                <button class="btn btn-danger" (click)="removeDriver( driver, i )">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+</table>
+
+<div *ngIf="!loading && drivers.length === 0" 
+     class="alert alert-warning text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">No hay Registros</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>
+
+<div *ngIf="loading" class="alert alert-info text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">Loading ... </h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>

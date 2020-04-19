@@ -1,6 +1,6 @@
 
 export class VehicleModel {
-    vehicleId: number;
+    id: number;
     brand: string;
     model: string;
     plate: string;
