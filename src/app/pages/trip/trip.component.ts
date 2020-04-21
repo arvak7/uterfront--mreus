@@ -24,12 +24,11 @@ export class TripComponent implements OnInit {
   constructor(private driversService: DriversService,
     private vehiclesService: VehiclesService,
     private tripsService: TripsService,
-    private fb: FormBuilder) {
-    this.createForm();
-    this.createListeners();    
-  }
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.createForm();
+    this.createListeners();
   }
 
 
@@ -42,8 +41,8 @@ export class TripComponent implements OnInit {
   }
 
   createListeners() {
-    this.forma.get("picker").valueChanges.subscribe(event => {      
-      this.tripDate = event;      
+    this.forma.get("picker").valueChanges.subscribe(event => {
+      this.tripDate = event;
       this.driversService.getFreeDrivers().subscribe((resp: DriverModel[]) => {
         this.driversList = resp;
       });
@@ -57,15 +56,25 @@ export class TripComponent implements OnInit {
   // Validations
   //
   get vehicleInvalid() {
-    return this.forma.get('picker').invalid && (this.forma.get('vehicle').touched || this.forma.get('vehicle').dirty)
+    return this.forma.get('vehicle').invalid && (this.forma.get('vehicle').touched || this.forma.get('vehicle').dirty)
+  }
+
+  get dateInvalid() {
+    return this.forma.get('picker').invalid && (this.forma.get('picker').touched || this.forma.get('picker').dirty)
+  }
+
+  get driverInvalid() {
+    return this.forma.get('driver').invalid && (this.forma.get('driver').touched || this.forma.get('driver').dirty)
   }
 
 
-  save() {           
-    var newTrip: TripModel = new TripModel(this.forma.controls.driver.value[0], this.forma.controls.vehicle.value[0], this.tripDate);    
-    this.tripsService.createTrip(newTrip).subscribe(resp => {
+  save() {
+    if (this.forma.valid) {
+      var newTrip: TripModel = new TripModel(this.forma.controls.driver.value[0], this.forma.controls.vehicle.value[0], this.tripDate);
+      this.tripsService.createTrip(newTrip).subscribe(resp => {
 
-    });
+      });
+    }
   }
 
 }

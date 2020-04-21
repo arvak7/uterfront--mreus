@@ -7,7 +7,7 @@
         <div>
             <mat-form-field>
                 <small><mat-label>Choose a trip date</mat-label></small>    
-                <input matInput [matDatepicker]="picker" formControlName="picker">
+                <input matInput [matDatepicker]="picker" formControlName="picker" [class.is-invalid]="dateInvalid">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -25,13 +25,13 @@
         <div>
             <mat-form-field>
               <mat-label>Drivers</mat-label>
-              <mat-select multiple formControlName="driver">
+              <mat-select multiple formControlName="driver" [class.is-invalid]="driverInvalid">
                 <mat-option *ngFor="let driver of driversList" [value]="driver">{{driver.name}} {{driver.surname}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         
-          <div class="form-group text-center">
+          <div class="form-group text-center">            
           <button type="submit"
                   class="btn btn-primary w-25">
           <i class="fa fa-save"></i>                        
