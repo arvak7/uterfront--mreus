@@ -35,6 +35,10 @@ export class DriversService {
     return this.http.get(`${this.url}`);
   }
 
+  getFreeDrivers() {
+    return this.http.get(`${this.url}`);
+  }
+
   getDriver(id: string) {
     return this.http.get((`${ this.url }/${id}`));
   }

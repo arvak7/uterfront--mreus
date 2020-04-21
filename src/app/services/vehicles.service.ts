@@ -35,6 +35,10 @@ export class VehiclesService {
     return this.http.get(`${this.url}/`);
   }
 
+  getFreeVehicles() {
+    return this.http.get(`${this.url}/`);
+  }
+
   getVehicle(id: string) {
     return this.http.get((`${ this.url }/${id}`));
   }

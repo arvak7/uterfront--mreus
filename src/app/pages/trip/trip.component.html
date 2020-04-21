@@ -1,0 +1,53 @@
+<h4>Listado de Viajes</h4>
+<hr>
+
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="save()">
+    <div>
+
+        <div>
+            <mat-form-field>
+                <small><mat-label>Choose a trip date</mat-label></small>    
+                <input matInput [matDatepicker]="picker" formControlName="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+        
+        <div>
+            <mat-form-field>
+              <mat-label>Vehicles</mat-label>
+              <mat-select multiple formControlName="vehicle" [class.is-invalid]="vehicleInvalid">
+                <mat-option *ngFor="let vehicle of vehicleList" [value]="vehicle">{{vehicle.brand}} {{vehicle.model}} {{vehicle.plate}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+                
+        <div>
+            <mat-form-field>
+              <mat-label>Drivers</mat-label>
+              <mat-select multiple formControlName="driver">
+                <mat-option *ngFor="let driver of driversList" [value]="driver">{{driver.name}} {{driver.surname}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        
+          <div class="form-group text-center">
+          <button type="submit"
+                  class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>                        
+          Guardar
+          </button>
+
+      </div>
+
+    </div>
+
+</form>
+
+
+
+
+
+
+
+
