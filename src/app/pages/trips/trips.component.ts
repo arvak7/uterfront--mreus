@@ -1,53 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DriverModel } from 'src/app/models/driver.model';
+import {TripsService} from '../../services/trips.service'
+import { TripModel } from '../../models/trip.model';
 import { ActivatedRoute } from '@angular/router'
-import { DriversService } from 'src/app/services/drivers.service';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.css']
 })
-export class TripsComponent implements OnInit {
+export class TripsComponent implements OnInit {  
 
-  forma: FormGroup;
+  constructor( private tripsService: TripsService) { }
 
-  driversList: DriverModel[];
-  vehicleList: string[] =['Peugeot 3008', 'Seat Ibiza', 'Seat Panda', 'Pepperoni', 'Sausage', 'Tomato'];
-
-  constructor(private DriversService: DriversService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder) {
-    this.createForm();
-  }
+  trips: TripModel[] = [];
+  loading = false;
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');    
-    if (id !== 'new') {
-      this.DriversService.getFreeDrivers()
-        .subscribe( (resp: DriverModel[]) => {
-            this.driversList = resp;            
-        });
-    }
-  }
-
-  createForm() {
-    this.forma = this.fb.group({
-      vehicle: [''],
-      driver: [''],
-      picker: ['']
+    this.loading = true;
+    this.tripsService.getTrips()
+    .subscribe( (resp: TripModel[]) => {
+        this.trips = resp;
+        this.loading = false;
     });
   }
 
-  guardar() {
-    console.log("aqui entra");
-    console.log(this.forma);
+  removeTrip( trip: TripModel, i: number) {     
+    Swal.fire({
+      title: '¿ Esta seguro?',
+      text: `Esta seguro de que desa borrar a ${ trip.vehicles[0].brand } ${ trip.vehicles[0].model } ${ trip.drivers[0].name } ${ trip.drivers[0].surname } ${ trip.date }`,
+      icon: 'question',
+      showConfirmButton: true,
+      showCancelButton: true
+    }).then( resp => {
+      if ( resp.value ) {
+        this.tripsService.removeTrip( trip.tripId ).subscribe();
+        this.trips.splice(i,1);
+      }
+    });    
   }
-
 }

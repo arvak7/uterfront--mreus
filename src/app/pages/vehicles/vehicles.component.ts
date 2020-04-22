@@ -14,14 +14,14 @@ export class VehiclesComponent implements OnInit {
   constructor( private vehicleService: VehiclesService) { }
 
   vehicles: VehicleModel[] = [];
-  cargando = false;
+  loading = false;
 
   ngOnInit(): void {
-    this.cargando = true;
+    this.loading = true;
     this.vehicleService.getVehicles()
     .subscribe( (resp: VehicleModel[]) => {
         this.vehicles = resp;
-        this.cargando = false;
+        this.loading = false;
     });
   }
 

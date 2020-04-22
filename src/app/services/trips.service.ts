@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { DriverModel } from '../models/driver.model';
-import { VehicleModel } from '../models/vehicle.model';
 import { TripModel } from '../models/trip.model';
 
 
@@ -25,5 +23,16 @@ export class TripsService {
     );
   }
 
+  getTrips() {
+    return this.http.get(`${this.url}`);
+  }
+
+  getTrip(id: string) {
+    return this.http.get((`${ this.url }/${id}`));
+  }
+
+  removeTrip(id: number) {    
+    return this.http.delete((`${ this.url }/${id}`));
+  }
   
 }
