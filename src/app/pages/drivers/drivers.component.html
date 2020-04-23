@@ -1,16 +1,20 @@
-<h1>Listado de conductores</h1>
-<hr>
-
-<div class="row">
-    <div class="col text-right">
-        <button routerLink="/driver/new"
-            class="btn btn-primary">
-            <i class="fa fa-plus">
-                Agregar
-            </i>
-        </button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10"><h1>Listado de conductores</h1></div>    
+        <div class="col text-right d-flex p-2">
+            <button routerLink="/driver/new"
+                class="btn btn-primary">
+                <i class="fa fa-plus">
+                    Agregar
+                </i>
+            </button>
+        </div>
     </div>
 </div>
+
+<hr>
+
+
 
 <table *ngIf="!loading && drivers.length > 0" class="table mt-3 animated fadeIn faster">
     <thead class="thead-dark">
