@@ -7,6 +7,7 @@ import { DriversComponent } from './pages/drivers/drivers.component';
 import { DriverComponent } from './pages/driver/driver.component';
 import { TripsComponent } from './pages/trips/trips.component';
 import { TripComponent } from './pages/trip/trip.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
 
 const routes: Routes = [
   { path: 'vehicles', component: VehiclesComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'driver/:id', component: DriverComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'trip/:id', component: TripComponent },
+  { path: 'navbar', component: NavbarComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'vehicles'}
 ]
 

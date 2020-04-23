@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { NavbarComponent } from './pages/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatSelectModule} from '@angular/material/select';
     DriversComponent,
     DriverComponent,
     TripsComponent,
-    TripComponent
+    TripComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
