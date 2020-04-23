@@ -25,14 +25,14 @@
     </thead>
     <tbody>
         <tr *ngFor="let vehicle of vehicles; let i = index">
-            <th scope="row">{{vehicle.vehicleId}}</th>
+            <th scope="row">{{vehicle.id}}</th>
             <td>{{vehicle.brand}}</td>
             <td>{{vehicle.model}}</td>
             <td>{{vehicle.plate}}</td>
             <td>{{vehicle.licenseRequired}}</td>
             <td>
                 <button class="btn btn-info mr-1"
-                    [routerLink]="['/vehicle', vehicle.vehicleId]">
+                    [routerLink]="['/vehicle', vehicle.id]">
                     <i class="fa fa-pen"></i>
                 </button>
                 <button class="btn btn-danger" (click)="removeVehicle( vehicle, i )">

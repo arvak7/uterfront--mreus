@@ -35,7 +35,7 @@ export class TripsComponent implements OnInit {
       showCancelButton: true
     }).then( resp => {
       if ( resp.value ) {
-        this.tripsService.removeTrip( trip.tripId ).subscribe();
+        this.tripsService.removeTrip( trip.id ).subscribe();
         this.trips.splice(i,1);
       }
     });    

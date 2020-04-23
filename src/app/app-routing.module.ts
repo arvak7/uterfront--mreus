@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'trips', component: TripsComponent },
   { path: 'trip/:id', component: TripComponent },
   { path: 'navbar', component: NavbarComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'vehicles'}
+  { path: '**', pathMatch: 'full', redirectTo: 'trips'}
 ]
 
 @NgModule({  

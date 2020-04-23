@@ -24,13 +24,13 @@
     </thead>
     <tbody>
         <tr *ngFor="let trip of trips; let i = index">
-            <th scope="row">{{trip.tripId}}</th>
+            <th scope="row">{{trip.id}}</th>
             <td>{{trip.date}}</td>
             <td>{{trip.vehicle.brand}} {{trip.vehicle.model}}</td>
             <td>{{trip.driver.name}} {{trip.driver.surname}}</td>            
             <td>
                 <button class="btn btn-info mr-1"
-                    [routerLink]="['/trip', trip.tripId]">
+                    [routerLink]="['/trip', trip.id]">
                     <i class="fa fa-pen"></i>
                 </button>
                 <button class="btn btn-danger" (click)="removeTrip( trip, i )">

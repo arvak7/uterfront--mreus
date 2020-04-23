@@ -43,7 +43,7 @@
         <mat-form-field>
           <mat-label>Vehicles</mat-label>
           <mat-select multiple formControlName="vehicle" [class.is-invalid]="vehicleInvalid">
-            <mat-option *ngFor="let vehicle of vehicleList" [value]="vehicle.vehicleId">{{vehicle.brand}}
+            <mat-option *ngFor="let vehicle of vehicleList" [value]="vehicle.id">{{vehicle.brand}}
               {{vehicle.model}} {{vehicle.plate}}</mat-option>
           </mat-select>
         </mat-form-field>

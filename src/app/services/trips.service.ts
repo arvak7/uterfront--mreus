@@ -18,7 +18,7 @@ export class TripsService {
     return this.http.post(`${this.url}`, newTrip)
     .pipe(
       map( (resp: TripModel) => {
-        newTrip.tripId = resp.tripId;
+        newTrip.id = resp.id;
       })
     );
   }
@@ -27,8 +27,8 @@ export class TripsService {
     const tripTemp = {
       ...trip
     }
-    delete tripTemp.tripId;
-    return this.http.put(`${ this.url }/${trip.tripId}`, tripTemp);
+    delete tripTemp.id;
+    return this.http.put(`${ this.url }/${trip.id}`, tripTemp);
   }
 
   getTrips() {

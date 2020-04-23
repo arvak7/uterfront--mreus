@@ -44,7 +44,7 @@ export class TripComponent implements OnInit {
         .subscribe( (resp: TripModel) => {
           this.forma.controls.picker.setValue(resp.date);  
           console.log("vehid: " + resp.vehicle.id);
-          this.forma.controls.vehicle.setValue([resp.vehicle.vehicleId]);    
+          this.forma.controls.vehicle.setValue([resp.vehicle.id]);    
           this.forma.controls.driver.setValue([resp.driver.id]);
           this.forma.controls.id.setValue(id);
           this.id = parseInt(id);                    
@@ -111,7 +111,7 @@ export class TripComponent implements OnInit {
       this.vehicleList.forEach( (a: VehicleModel) => {
         for (let index = 0; index < this.forma.controls.vehicle.value.length; index++) {
           let element: number = this.forma.controls.vehicle.value[index];
-          if (a.vehicleId == element) {
+          if (a.id == element) {
             vehicle = a;
           }          
         }
