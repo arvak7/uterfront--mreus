@@ -7,9 +7,10 @@ export class TripModel {
     vehicle: VehicleModel;
     driver: DriverModel;    
 
-    constructor(driver: DriverModel, vehicle: VehicleModel, date: Date) {
+    constructor(driver: DriverModel, vehicle: VehicleModel, date: Date, tripId?: number) {
         this.driver = driver;
         this.vehicle = vehicle;
         this.date = date;
+        this.tripId = tripId
      }
 }

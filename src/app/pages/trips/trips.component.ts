@@ -25,10 +25,11 @@ export class TripsComponent implements OnInit {
     });
   }
 
-  removeTrip( trip: TripModel, i: number) {     
+  removeTrip( trip: TripModel, i: number) {   
+    console.log("trip: "+ trip.vehicle)  
     Swal.fire({
       title: '¿ Esta seguro?',
-      text: `Esta seguro de que desa borrar a ${ trip.vehicles[0].brand } ${ trip.vehicles[0].model } ${ trip.drivers[0].name } ${ trip.drivers[0].surname } ${ trip.date }`,
+      text: `Esta seguro de que desa borrar a ${ trip.vehicle.brand } ${ trip.vehicle.model } ${ trip.driver.name } ${ trip.driver.surname } ${ trip.date }`,
       icon: 'question',
       showConfirmButton: true,
       showCancelButton: true

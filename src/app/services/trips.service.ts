@@ -23,6 +23,14 @@ export class TripsService {
     );
   }
 
+  updateTrip(trip: TripModel) {
+    const tripTemp = {
+      ...trip
+    }
+    delete tripTemp.tripId;
+    return this.http.put(`${ this.url }/${trip.tripId}`, tripTemp);
+  }
+
   getTrips() {
     return this.http.get(`${this.url}`);
   }

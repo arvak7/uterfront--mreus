@@ -54,8 +54,9 @@ export class VehicleComponent implements OnInit {
       peticion = this.vehiclesService.createVehicle(this.vehicle);
     }
     peticion.subscribe(resp => {
+      console.log("resp: " + resp)
       Swal.fire({
-        title: this.vehicle.model,
+        title: this.vehicle.brand + ' ' + this.vehicle.model + ' ' + this.vehicle.plate,
         text: 'Se actualizó correctamente',
         icon: 'success'
       });
