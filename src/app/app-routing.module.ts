@@ -8,6 +8,7 @@ import { DriverComponent } from './pages/driver/driver.component';
 import { TripsComponent } from './pages/trips/trips.component';
 import { TripComponent } from './pages/trip/trip.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   { path: 'vehicles', component: VehiclesComponent },
@@ -17,12 +18,13 @@ const routes: Routes = [
   { path: 'trips', component: TripsComponent },
   { path: 'trip/:id', component: TripComponent },
   { path: 'navbar', component: NavbarComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'trips'}
+  { path: 'home', component: HomeComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'home'}
 ]
 
 @NgModule({  
   imports: [ 
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash: true})
    ],
    exports: [
      RouterModule
