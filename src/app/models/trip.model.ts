@@ -4,12 +4,12 @@ import { DriverModel } from './driver.model';
 export class TripModel {
     id: number;
     date: Date;
-    vehicle: VehicleModel;
-    driver: DriverModel;    
+    vehicles: VehicleModel[];
+    drivers: DriverModel[];    
 
-    constructor(driver: DriverModel, vehicle: VehicleModel, date: Date, id?: number) {
-        this.driver = driver;
-        this.vehicle = vehicle;
+    constructor(drivers: DriverModel[], vehicles: VehicleModel[], date: Date, id?: number) {
+        this.drivers = drivers;
+        this.vehicles = vehicles;
         this.date = date;
         this.id = id;
      }

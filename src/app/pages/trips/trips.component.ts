@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TripsService} from '../../services/trips.service'
 import { TripModel } from '../../models/trip.model';
-import { ActivatedRoute } from '@angular/router'
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,11 +24,10 @@ export class TripsComponent implements OnInit {
     });
   }
 
-  removeTrip( trip: TripModel, i: number) {   
-    console.log("trip: "+ trip.vehicle)  
+  removeTrip( trip: TripModel, i: number) {       
     Swal.fire({
       title: '¿ Esta seguro?',
-      text: `Esta seguro de que desa borrar a ${ trip.vehicle.brand } ${ trip.vehicle.model } ${ trip.driver.name } ${ trip.driver.surname } ${ trip.date }`,
+      text: `Esta seguro de que desa borrar a ${ trip.vehicles[0].brand } ${ trip.vehicles[0].model } ${ trip.drivers[0].name } ${ trip.drivers[0].surname } ${ trip.date }`,
       icon: 'question',
       showConfirmButton: true,
       showCancelButton: true

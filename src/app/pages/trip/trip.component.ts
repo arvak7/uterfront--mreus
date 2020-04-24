@@ -42,10 +42,18 @@ export class TripComponent implements OnInit {
     if (id !== 'new') {
       this.tripsService.getTrip(id)
         .subscribe( (resp: TripModel) => {
-          this.forma.controls.picker.setValue(resp.date);  
-          console.log("vehid: " + resp.vehicle.id);
-          this.forma.controls.vehicle.setValue([resp.vehicle.id]);    
-          this.forma.controls.driver.setValue([resp.driver.id]);
+          console.log(JSON.stringify(resp));
+          let vehiclesId: number[] = [];
+          let driversId: number[] = [];
+          resp.vehicles.forEach(vehicle => {
+            vehiclesId.push(vehicle.id);
+          });
+          resp.drivers.forEach(driver => {
+            driversId.push(driver.id);
+          });
+          this.forma.controls.picker.setValue(resp.date);            
+          this.forma.controls.vehicle.setValue(vehiclesId);    
+          this.forma.controls.driver.setValue(driversId);
           this.forma.controls.id.setValue(id);
           this.id = parseInt(id);                    
         });
@@ -93,12 +101,11 @@ export class TripComponent implements OnInit {
   }
 
 
-  save() {
-   
+  save() {   
 
     if (this.forma.valid) {
-      let vehicle: VehicleModel;
-      let driver:  DriverModel;
+      let vehicles: VehicleModel[]  = [];
+      let drivers:  DriverModel[]   = [];
 
       Swal.fire({
         title: 'Espere',
@@ -112,7 +119,7 @@ export class TripComponent implements OnInit {
         for (let index = 0; index < this.forma.controls.vehicle.value.length; index++) {
           let element: number = this.forma.controls.vehicle.value[index];
           if (a.id == element) {
-            vehicle = a;
+            vehicles.push(a);
           }          
         }
       });
@@ -120,7 +127,7 @@ export class TripComponent implements OnInit {
         for (let index = 0; index < this.forma.controls.driver.value.length; index++) {
           let element: number = this.forma.controls.driver.value[index];
           if (a.id == element) {
-            driver = a;
+            drivers.push(a);
           }          
         }
       });
@@ -128,17 +135,18 @@ export class TripComponent implements OnInit {
       let peticion: Observable<any>;
       
       if (this.id) {
-        var updateTrip: TripModel = new TripModel(driver, vehicle, this.tripDate, this.id);     
+        var updateTrip: TripModel = new TripModel(drivers, vehicles, this.tripDate, this.id);     
         peticion = this.tripsService.updateTrip(updateTrip);
       } else {
-        var newTrip: TripModel = new TripModel(driver, vehicle, this.tripDate);
+        var newTrip: TripModel = new TripModel(drivers, vehicles, this.tripDate);
+        console.log("newtrip" + JSON.stringify(newTrip));
         peticion = this.tripsService.createTrip(newTrip);
       }
 
       peticion.subscribe(resp => {
         console.log("resp: " + resp)
         Swal.fire({
-          title: vehicle.brand + ' ' + vehicle.model + ' ' + driver.name + ' ' + driver.surname + ' ' + this.tripDate,
+          title: vehicles[0].brand + ' ' + vehicles[0].model + ' ' + drivers[0].name + ' ' + drivers[0].surname + ' ' + this.tripDate,
           text: 'Se actualizó correctamente',
           icon: 'success'
         });

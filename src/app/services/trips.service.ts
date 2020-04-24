@@ -17,7 +17,7 @@ export class TripsService {
   createTrip(newTrip: TripModel) {    
     return this.http.post(`${this.url}`, newTrip)
     .pipe(
-      map( (resp: TripModel) => {
+      map( (resp: TripModel) => {        
         newTrip.id = resp.id;
       })
     );
