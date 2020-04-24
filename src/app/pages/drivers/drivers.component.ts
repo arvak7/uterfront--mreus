@@ -18,8 +18,7 @@ export class DriversComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.driversService.getDrivers()
-      .subscribe( (resp: DriverModel[]) => {     
-        console.log(resp);   
+      .subscribe( (resp: DriverModel[]) => {             
         this.drivers = resp;
         this.loading = false;
     });

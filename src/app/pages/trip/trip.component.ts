@@ -41,8 +41,7 @@ export class TripComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');    
     if (id !== 'new') {
       this.tripsService.getTrip(id)
-        .subscribe( (resp: TripModel) => {
-          console.log(JSON.stringify(resp));
+        .subscribe( (resp: TripModel) => {          
           let vehiclesId: number[] = [];
           let driversId: number[] = [];
           resp.vehicles.forEach(vehicle => {
@@ -138,13 +137,11 @@ export class TripComponent implements OnInit {
         var updateTrip: TripModel = new TripModel(drivers, vehicles, this.tripDate, this.id);     
         peticion = this.tripsService.updateTrip(updateTrip);
       } else {
-        var newTrip: TripModel = new TripModel(drivers, vehicles, this.tripDate);
-        console.log("newtrip" + JSON.stringify(newTrip));
+        var newTrip: TripModel = new TripModel(drivers, vehicles, this.tripDate);        
         peticion = this.tripsService.createTrip(newTrip);
       }
 
-      peticion.subscribe(resp => {
-        console.log("resp: " + resp)
+      peticion.subscribe(resp => {        
         Swal.fire({
           title: vehicles[0].brand + ' ' + vehicles[0].model + ' ' + drivers[0].name + ' ' + drivers[0].surname + ' ' + this.tripDate,
           text: 'Se actualizó correctamente',
