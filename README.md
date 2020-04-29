@@ -29,3 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Status
 
 Milestone 1 - You have a angular CRUD, you can select more than one driver or vehicle, but at this moment only send 1 due to the back not allow now
+Milestone 2 - The functionality of having multiple vehicles and drivers for a single trip has been added
