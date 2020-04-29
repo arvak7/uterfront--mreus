@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { DriverModel } from '../models/driver.model';
+import { DateFormatPipe } from '../utils/dateformat.component';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ export class DriversService {
 
   url = 'http://localhost:8079/api/backoffice/v1/drivers';
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient,
+               private _dateFormatPipe: DateFormatPipe) { }
 
   
   createDriver(driver: DriverModel) {
@@ -35,8 +37,9 @@ export class DriversService {
     return this.http.get(`${this.url}`);
   }
 
-  getFreeDrivers() {
-    return this.http.get(`${this.url}`);
+  getFreeDrivers(date: Date, license: string) {
+    let transformedDate = this._dateFormatPipe.transform(date);
+    return this.http.get(`${this.url}/free?fecha=${transformedDate}&license=${license}`);
   }
 
   getDriver(id: string) {

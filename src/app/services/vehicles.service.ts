@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { VehicleModel } from '../models/vehicle.model';
+import { DateFormatPipe } from '../utils/dateformat.component';
 import { map } from 'rxjs/operators';
 
 
@@ -11,7 +12,8 @@ export class VehiclesService {
 
   url = 'http://localhost:8079/api/backoffice/v1/vehicles';
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient,
+               private _dateFormatPipe: DateFormatPipe) { }
 
   
   createVehicle(vehicle: VehicleModel) {
@@ -35,8 +37,9 @@ export class VehiclesService {
     return this.http.get(`${this.url}/`);
   }
 
-  getFreeVehicles() {
-    return this.http.get(`${this.url}/`);
+  getFreeVehicles(date: Date) {
+    let transformedDate = this._dateFormatPipe.transform(date);    
+    return this.http.get(`${this.url}/free/${transformedDate}`);
   }
 
   getVehicle(id: string) {
